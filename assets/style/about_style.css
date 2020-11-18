@@ -1,0 +1,83 @@
+:root {
+  --mainColor: #eaeaea;
+  --secondaryColor: #fff;
+  --borderColor: #c1c1c1;
+  --mainText: black;
+  --secondaryText: #4b5156;
+
+  --themeDotBorder: #24292e;
+  --previewBg: rgba(251, 249, 243, 0.8);
+
+  --previewShadow: #d6d6d6;
+  --buttonColor: black;
+}
+body {
+  background-color: var(--secondaryColor);
+}
+section {
+  height: 680px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  background-color: var(--secondaryColor);
+}
+.hero-column {
+  position: relative;
+  margin-top: 120px;
+  margin-bottom: 100px;
+  width: 60%;
+  padding: 20px 32px 20px 32px;
+  border: 4px var(--borderColor) solid;
+}
+.hero-column h2 {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: var(--mainText);
+}
+.hero-column p {
+  color: var(--secondaryText);
+  font-size: 1.2rem;
+}
+
+.square {
+  width: 15px;
+  height: 15px;
+  border: 4px var(--borderColor) solid;
+  background-color: var(--secondaryColor);
+  position: absolute;
+}
+.square1 {
+  top: -8px;
+  left: -8px;
+}
+.square2 {
+  top: -10px;
+  right: -10px;
+}
+.square3 {
+  bottom: -10px;
+  left: -10px;
+}
+.square4 {
+  bottom: -10px;
+  right: -10px;
+}
+@media screen and (max-width: 700px) {
+  section {
+    height: 1046px;
+  }
+  .hero-column h2 {
+    font-size: 1.8rem;
+  }
+  .hero-column p {
+    font-size: 1.1rem;
+  }
+  .hero-column {
+    margin-top: 70px;
+    margin-bottom: 60px;
+    width: 92%;
+    padding: 20px 22px 20px 22px;
+  }
+}

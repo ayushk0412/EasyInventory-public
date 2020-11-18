@@ -1,0 +1,110 @@
+:root {
+  --mainColor: #eaeaea;
+  --secondaryColor: #fff;
+  --borderColor: #c1c1c1;
+  --mainText: black;
+  --secondaryText: #4b5156;
+
+  --themeDotBorder: #24292e;
+  --previewBg: rgba(251, 249, 243, 0.8);
+
+  --buttonColor: black;
+}
+.project-button-wrapper {
+  margin: 10px auto 10px auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+project-button * {
+  margin: 0;
+  padding: 0;
+  transition: background-color 2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.project-button {
+  border: 2px solid var(--themeDotBorder);
+  background-color: var(--previewShadow);
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 10px 7px;
+  width: 230px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background 5s cubic-bezier(0.19, 1, 0.22, 1),
+    border 1s cubic-bezier(0.19, 1, 0.22, 1),
+    color 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  user-select: none;
+}
+.per-btn {
+  width: 270px;
+}
+
+.project-button a {
+  color: var(--mainText);
+  font-family: "Proza Libre", sans-serif;
+
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.project-button .mask {
+  background-color: var(--buttonColor);
+  background-color: var(--buttonColor);
+  height: 100px;
+  position: absolute;
+  transform: translate3d(-120%, -50px, 0) rotate3d(0, 0, 1, 45deg);
+  transition: all 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+  width: 200px;
+}
+
+.project-button .shift {
+  display: inline-block;
+  transition: all 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.project-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--themeDotBorder);
+  box-shadow: 0 0 5px rgba(255, 245, 245, 0.8);
+  transition: background 0s;
+}
+
+.project-button:hover a {
+  color: var(--mainText);
+}
+
+.project-button:hover .mask {
+  background-color: #fff;
+  transform: translate3d(120%, -100px, 0) rotate3d(0, 0, 1, 90deg);
+}
+
+.project-button:hover .shift {
+  transform: translateX(5px);
+}
+
+.project-button:active {
+  background-color: #fff;
+}
+
+.project-button:active a {
+  color: #202020;
+}
+@media screen and (max-width: 800px) {
+  .project-button-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .project-button {
+    padding: 7px 4px;
+    width: 200px;
+    margin-top: 10px;
+  }
+  .project-button a {
+    font-size: 1rem;
+  }
+  .per-btn {
+    width: 240px;
+  }
+}

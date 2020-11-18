@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,700;1,600;1,800&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="{%static 'style/contactus.css'%}">
+    <link rel="stylesheet" href="{%static 'style/index_style.css'%}">
+    <link rel="stylesheet" href="{%static 'style/nav_style.css'%}">
+    <link rel="stylesheet" href="{%static 'style/footer_style.css'%}">
+    <link rel="stylesheet" href="{%static 'style/button_style.css'%}">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link id="theme-style" rel="stylesheet" href="" />
+    <title>Easy Inventory | Contact Us</title>
+</head>
+<body>
+    
+    <header class="header">
+      {% if user.is_authenticated %}
+      <a href="{% url 'dashboard' %}" class="logo">Easy Inventory</span></a>
+      {% else %}
+      <a href="/" class="logo">Easy Inventory</span></a>
+      {%endif%}
+        <div class="menu-btn">
+          <div class="menu-btn__lines"></div>
+        </div>
+        <ul class="menu-items">
+          {% if user.is_authenticated %}
+          <li><a href="/dashboard" class="menu-item">Dashboard</a></li>
+          {% else %}
+          <li><a href="/" class="menu-item">Home</a></li>
+          {%endif%}
+          <li><a href="{% url 'about' %}" class="menu-item">About</a></li>
+         
+          <li><a href="/contact" class="menu-item">Contact</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}" class="menu-item">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}" class="menu-item">Login</a></li>
+          {%endif%}
+          <li class="dots-nav-list">
+            <div id="theme-options-wrapper">
+              <div data-mode="light" class="theme-dots" id="light-mode"></div>
+              <div data-mode="blue" class="theme-dots" id="blue-mode"></div>
+            </div>
+          </li>
+        </ul>
+     
+      </header>
+      {%if validation == 'Validated'%}
+      <script>
+        alert("Thank you for contacting us, You will be reverted within 48 hours.")
+        </script>
+      {% else %}
+       <!--Loading animation-->
+      <h1 style="display: none;"></h1>
+      {% endif %}
+      <main data-aos="fade-in"  data-aos-once="true">
+        <p class="map-title map">Locate us on google maps</p>
+    <div class="main-map">
+       
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1374.8240126666763!2d77.61113302398435!3d12.934082659078364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc12c41d8c342ce04!2sForum%20Mall!5e0!3m2!1sen!2sin!4v1599074943976!5m2!1sen!2sin"    >
+        </iframe>
+    </div>
+    <p class="map-title feedback">Customer feedback form</p>   
+    <div class="container">
+        
+        <form action="" method="POST" >
+          {% csrf_token %}
+          <p class="container-title">First Name</p>
+          <input class="container-input" type="text" placeholder="Your first name" name="fname" id="">
+          <p class="container-title">Last Name</p>
+          <input class="container-input" type="text" placeholder="Your last name" name="lname" id="">
+          <p class="container-title">Phone Number</p>
+          <input class="container-input" placeholder="Your phone number" type="text" name="phno" id="">
+          <p class="container-title">Email</p>
+          <input class="container-input" type="text" placeholder="Your email address" name="email" id="">
+          <p class="container-title">Comments</p>
+          <textarea class="container-input-textarea" name="comments" id="" ></textarea>
+ <center>
+          <input class="container-submit" type="submit" value="Submit">
+      </center>
+        </form>
+
+</div>
+    </main>
+
+    <footer>
+        <div class="hero-footer">
+            <h3>Easy Inventory</h3>
+            <p>Copyright &copy;2020</p>
+        </div>
+    </footer>
+    <script>  
+      let theme = localStorage.getItem("theme");
+      if (theme == null) {
+        setTheme("light");
+      } else {
+        setTheme(theme);
+      }
+      
+      let themeDots = document.getElementsByClassName("theme-dots");
+      
+      for (var i = 0; themeDots.length > i; i++) {
+        themeDots[i].addEventListener("click", function () {
+          let mode = this.dataset.mode;
+          console.log("Option clicked", mode);
+          setTheme(mode);
+        });
+      }
+      
+      function setTheme(mode) {
+        if (mode == "light") {
+          document.getElementById("theme-style").href = "{%static 'style/index_style.css'%}";
+        }
+        if (mode == "blue") {
+          document.getElementById("theme-style").href = "{%static 'style/blue_style.css'%}";
+        }
+        if (mode == "green") {
+          document.getElementById("theme-style").href = "{%static 'style/green_style.css'%}";
+        }
+        if (mode == "purple") {
+          document.getElementById("theme-style").href = "{%static 'style/purple_style.css'%}";
+        }
+        if (mode == "red") {
+          document.getElementById("theme-style").href = "{%static 'style/red_style.css'%}";
+        }
+      
+        localStorage.setItem("theme", mode);
+      }
+    </script>
+      <script src="{%static 'script/NavScript.js'%}"></script>
+      <script src="{%static 'script/ThemeScript.js'%}"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
+</body>
+</html>

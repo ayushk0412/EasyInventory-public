@@ -1,0 +1,155 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,700;1,600;1,800&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="{%static 'style/dashboard_style.css'%}">
+    <link rel="stylesheet" href="{%static 'style/loader_style.css'%}">
+    <link rel="stylesheet" href="{%static 'style/nav_style.css'%}">
+    <link rel="stylesheet" href="{%static 'style/footer_style.css'%}">
+    <link rel="stylesheet" href="{%static 'style/button_style.css'%}">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">s
+
+    <link id="theme-style" rel="stylesheet" href="" />
+    <title>Easy Inventory | Dashboard</title>
+</head>
+<body>
+    
+    <header class="header">
+      {% if user.is_authenticated %}
+      <a href="{% url 'dashboard' %}" class="logo">Easy Inventory</span></a>
+      {% else %}
+      <a href="/" class="logo">Easy Inventory</span></a>
+      {%endif%}
+        <div class="menu-btn">
+          <div class="menu-btn__lines"></div>
+        </div>
+        <ul class="menu-items">
+          {% if user.is_authenticated %}
+          <li><a href="/dashboard" class="menu-item">Dashboard</a></li>
+          {% else %}
+          <li><a href="/" class="menu-item">Home</a></li>
+          {%endif%}
+          <li><a href="{% url 'about' %}" class="menu-item">About</a></li>
+         
+          <li><a href="/contact" class="menu-item">Contact</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}" class="menu-item">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}" class="menu-item">Login</a></li>
+          {%endif%}
+          <li class="dots-nav-list">
+            <div id="theme-options-wrapper">
+              <div data-mode="light" class="theme-dots" id="light-mode"></div>
+              <div data-mode="blue" class="theme-dots" id="blue-mode"></div>
+            </div>
+          </li>
+        </ul>
+      </header>
+      <!--<div class="spinner-wrapper">
+        <div class="spinner"></div>
+      </div>-->
+      
+      <h3 class="user-name">Hello, <a href="{% url 'settings'%}">{{request.user.first_name}}&nbsp;{{request.user.last_name}}</a></h3>
+
+      <section class="s1" data-aos="fade-in"  data-aos-once="true">
+          <h2>ADD CATEGORY</h2>
+          <form action="" method="POST">
+            {% csrf_token %}
+              <input type="text" placeholder="Enter category name" class="input-category" name="category">
+              <input type="submit" value="add" class="submit-category">           
+          </form>
+         <div style="margin-top: 15px;">
+          <center>{% for message in messages%}
+            <p id="messages">{{message}}</p>
+            {% endfor %}
+        </center>
+      </div>
+      </section>
+      <section class="s2" style="min-height: 300px;" >
+        <div class="main-container"></div>
+        <div class="category-wrapper">
+          <a href="/inventory/All">
+          <div>
+            <div class="category" id="project1" >
+              <div class="category-preview">
+                <h2 class="category-title">All</h2>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        {% for i in all_categories %}
+        <a href="/inventory/{{i.category}}">
+          <div>
+            <div class="category" id="project1" >
+              <div class="category-preview">
+                <h2 class="category-title">{{i.category}}</h2>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+        
+  
+        
+      </section>
+    <footer>
+        <div class="hero-footer">
+            <h3>Easy Inventory</h3>
+            <p>Copyright &copy;2020</p>
+        </div>
+    </footer>
+    <script>  
+      let theme = localStorage.getItem("theme");
+      if (theme == null) {
+        setTheme("light");
+      } else {
+        setTheme(theme);
+      }
+      
+      let themeDots = document.getElementsByClassName("theme-dots");
+      
+      for (var i = 0; themeDots.length > i; i++) {
+        themeDots[i].addEventListener("click", function () {
+          let mode = this.dataset.mode;
+          console.log("Option clicked", mode);
+          setTheme(mode);
+        });
+      }
+      
+      function setTheme(mode) {
+        if (mode == "light") {
+          document.getElementById("theme-style").href = "{%static 'style/index_style.css'%}";
+        }
+        if (mode == "blue") {
+          document.getElementById("theme-style").href = "{%static 'style/blue_style.css'%}";
+        }
+        if (mode == "green") {
+          document.getElementById("theme-style").href = "{%static 'style/green_style.css'%}";
+        }
+        if (mode == "purple") {
+          document.getElementById("theme-style").href = "{%static 'style/purple_style.css'%}";
+        }
+        if (mode == "red") {
+          document.getElementById("theme-style").href = "{%static 'style/red_style.css'%}";
+        }
+      
+        localStorage.setItem("theme", mode);
+      }
+    </script>
+      <script src="{%static 'script/NavScript.js'%}"></script>
+      <script src="{%static 'script/ThemeScript.js'%}"></script>
+      <script src="{%static 'script/LoadingAnimation_style.js'%}"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
+</body>
+</html>
